@@ -1,0 +1,15 @@
+.login-page {
+  min-height: 100vh;
+
+  background-image:
+    linear-gradient(
+      rgba(8, 30, 48, 0.25),
+      rgba(8, 30, 48, 0.25)
+    ),
+    url("D:\UD works\Project\CMS-frontened\src\assets\forest.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  color: white;
+}
