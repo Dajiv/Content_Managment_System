@@ -1,0 +1,316 @@
+
+.register-page {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 20px;
+  background-image: url("../../assets/forest.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+
+.register-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(5, 15, 32, 0.88),
+    rgba(8, 28, 49, 0.78),
+    rgba(5, 15, 32, 0.9)
+  );
+}
+
+.register-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 490px;
+  margin: auto;
+}
+
+.register-card {
+  width: 100%;
+  padding: 38px 42px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+}
+
+/* Header */
+
+.register-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.register-logo {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #287db5, #14527f);
+  box-shadow: 0 6px 20px rgba(40, 125, 181, 0.4);
+}
+
+.register-logo span {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+}
+
+.register-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.register-tagline {
+  margin: 5px 0 24px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #9fc8e5;
+}
+
+.register-header h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.register-description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Form */
+
+.register-form-group {
+  margin-bottom: 18px;
+}
+
+.register-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.register-input-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 49px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.25s ease;
+}
+
+.register-input-wrapper:focus-within {
+  border-color: #56b2ed;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 0 3px rgba(40, 125, 181, 0.15);
+}
+
+.register-input-wrapper.input-error {
+  border-color: #ff7373;
+}
+
+.register-input-icon {
+  width: 25px;
+  color: #9bc9e8;
+  font-size: 18px;
+}
+
+.register-input-wrapper input {
+  width: 100%;
+  height: 46px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.register-input-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.register-password-toggle {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #83c9f4;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 0 8px 8px;
+}
+
+.register-password-toggle:hover {
+  color: #ffffff;
+}
+
+/* Error */
+
+.register-error {
+  display: block;
+  margin-top: 6px;
+  color: #ffaaaa;
+  font-size: 11px;
+}
+
+.register-submit-error {
+  margin: 12px 0;
+  padding: 11px;
+  border: 1px solid rgba(255, 115, 115, 0.4);
+  border-radius: 8px;
+  background: rgba(255, 70, 70, 0.12);
+  color: #ffc2c2;
+  font-size: 12px;
+}
+
+/* Terms */
+
+.register-terms {
+  margin: 5px 0 20px;
+}
+
+.register-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.register-checkbox-label input {
+  margin-top: 2px;
+  accent-color: #287db5;
+  cursor: pointer;
+}
+
+.register-checkbox-label a {
+  color: #83c9f4;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-checkbox-label a:hover {
+  text-decoration: underline;
+}
+
+/* Submit */
+
+.register-submit-button {
+  width: 100%;
+  height: 49px;
+  border: none;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #287db5, #17639b);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow: 0 7px 20px rgba(20, 100, 160, 0.3);
+  transition: all 0.25s ease;
+}
+
+.register-submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #3598d5, #287db5);
+  box-shadow: 0 10px 25px rgba(20, 100, 160, 0.4);
+}
+
+.register-submit-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Login Link */
+
+.register-login-link {
+  margin-top: 24px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+}
+
+.register-login-link a {
+  color: #83c9f4;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.register-login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+
+.register-footer {
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .register-page {
+    padding: 20px 14px;
+    align-items: flex-start;
+  }
+
+  .register-container {
+    margin: auto;
+  }
+
+  .register-card {
+    padding: 30px 23px;
+    border-radius: 16px;
+  }
+
+  .register-header h2 {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 380px) {
+  .register-card {
+    padding: 26px 17px;
+  }
+
+  .register-header h1 {
+    font-size: 21px;
+  }
+
+  .register-input-wrapper {
+    padding: 0 10px;
+  }
+}
