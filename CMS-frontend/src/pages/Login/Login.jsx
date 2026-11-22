@@ -2,10 +2,13 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
+import { apiRequest } from "../../services/api";
+import { useAuth } from "../../context/useAuth";
 
 function Login() {
 
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +17,21 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handleForgotPassword = async () => {
+    const resetEmail = window.prompt("Enter your account email:");
+    if (!resetEmail) return;
+
+    try {
+      const data = await apiRequest("/forgot-password", {
+        method: "POST",
+        body: JSON.stringify({ email: resetEmail.trim() }),
+      });
+      alert(data.message);
+    } catch (requestError) {
+      setError(requestError.message);
+    }
+  };
 
   const handleLogin = async (e) => {
 
@@ -29,36 +47,20 @@ function Login() {
 
     try {
 
-      const response = await fetch(
-        "http://127.0.0.1:8001/api/login",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-
-          body: JSON.stringify({
-            email: email.trim(),
-            password: password,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.message || "Invalid email or password.");
-        return;
-      }
+      const data = await apiRequest("/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
+        }),
+      });
 
       if (!data.token) {
         setError("Login failed. Authentication token not received.");
         return;
       }
 
-      localStorage.setItem("token", data.token);
+      login(data);
 
       // Remember me is currently a UI preference only.
       // Persistent login is handled by the stored token.
@@ -229,9 +231,9 @@ function Login() {
 
               </label>
 
-              <span className="forgot-password">
+              <button type="button" className="forgot-password" onClick={handleForgotPassword}>
                 Forgot Password?
-              </span>
+              </button>
 
             </div>
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -11,9 +12,36 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        if (!Schema::hasTable('users')) {
+            return;
+        }
+
+        if (!Schema::hasColumn('users', 'role')) {
+            $count = DB::table('users')->count();
+            if ($count > 0) {
+                throw new \RuntimeException(
+                    'Cannot add cms_db.users.role: the table is populated and no role value can be safely invented.'
+                );
+            }
+
+            Schema::table('users', function (Blueprint $table) {
+                $table->enum('role', ['admin', 'teacher', 'student'])
+                    ->default('student')
+                    ->after('password');
+            });
+        }
+
+        if (DB::table('users')->whereNull('role')->exists()) {
+            throw new \RuntimeException(
+                'Cannot reconcile cms_db.users.role: existing role values contain NULL.'
+            );
+        }
+
+        if (DB::table('users')->whereNotIn('role', ['admin', 'teacher', 'student'])->exists()) {
+            throw new \RuntimeException(
+                'Cannot reconcile cms_db.users.role: existing values are outside admin, teacher, or student.'
+            );
+        }
     }
 
     /**
@@ -21,14 +49,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-           $table->id();
-           $table->string('name');
-           $table->string('email')->unique();
-           $table->timestamp('email_verified_at')->nullable();
-           $table->string('password');
-           $table->remeberToken();
-           $table->timestamps();
-        });
+        throw new \RuntimeException(
+            'The role reconciliation migration is irreversible. Restore a verified database backup instead of rolling it back.'
+        );
     }
 };

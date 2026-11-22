@@ -1,9 +1,14 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
+import { apiRequest } from "../../services/api";
+import { useAuth } from "../../context/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -85,14 +90,27 @@ function Register() {
 
     setLoading(true);
 
-    // Backend API integration will be added
-    // after verifying Laravel registration routes.
+    try {
+      const data = await apiRequest("/register", {
+        method: "POST",
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          password: formData.password,
+          password_confirmation: formData.confirmPassword,
+        }),
+      });
 
-    setErrors({
-      submit: "Registration API is not connected yet.",
-    });
-
-    setLoading(false);
+      login(data);
+      navigate("/dashboard");
+    } catch (error) {
+      setErrors({
+        submit: error.message || "Unable to create account.",
+        ...error.errors,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
